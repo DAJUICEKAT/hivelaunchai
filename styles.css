@@ -1,3 +1,13 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+
+background-image:
+  radial-gradient(circle at top left, rgba(244,180,0,0.08), transparent 40%),
+  url("https://www.transparenttextures.com/patterns/hexellence.png");
+  color: white;
+}
 async function generateBusiness() {
 body {
   margin: 0;
@@ -5,7 +15,25 @@ body {
   font-family: Arial, sans-serif;
   background:
     linear-gradient(
-      135deg,
+      135deg,.result-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 18px;
+  padding: 25px;
+  margin-top: 20px;
+  backdrop-filter: blur(12px);
+}
+
+.result-card h2 {
+  color: #f4b400;
+  margin-bottom: 15px;
+}
+
+.content {
+  line-height: 1.7;
+  font-size: 15px;
+  color: #f1f1f1;
+}
       #121212 0%,
       #1c1c1c 50%,
       #2a1f00 100%
