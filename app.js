@@ -20,7 +20,11 @@ function canUseApp() {
   const idea = document.getElementById("idea").value;
   const results = document.getElementById("results");
 
-  results.innerHTML = "🐝 Building your business...";
+  results.innerHTML = `
+<div class="result-card">
+  🐝 Building your launch blueprint...
+</div>
+`;
 
   try {
     const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
@@ -109,4 +113,23 @@ Format everything using clean markdown headings and bullet points.
   } catch (err) {
     results.innerHTML = "❌ Network error: " + err.message;
   }
+}async function downloadPDF() {
+
+  const { jsPDF } = window.jspdf;
+
+  const doc = new jsPDF();
+
+  const text =
+    document.getElementById("results").innerText;
+
+  const splitText =
+    doc.splitTextToSize(text, 180);
+
+  doc.setFont("helvetica");
+
+  doc.setFontSize(12);
+
+  doc.text(splitText, 15, 20);
+
+  doc.save("HiveLaunch-Blueprint.pdf");
 }
