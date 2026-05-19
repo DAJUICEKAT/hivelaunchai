@@ -4,14 +4,24 @@
     <script src="https://www.paypal.com/sdk/js?client-id=Ac190WpMtbsAiO1WV99bQ56CML6zuh5Eihz8Mz493ivbpUodioESiUgwjvKak6gCMD6F1SFuM40Lz5c_"></script>
   <title>HiveLaunch AI</title>
   <link rel="stylesheet" href="styles.css">
-</head>
+</head><script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <body>
 
   <div class="container">
 
     <h1>🐝 HiveLaunch AI</h1>
-    <p>Turn any idea into a launch-ready business</p>
+    <div class="card">
+  <h2>🚀 Launch Faster</h2>
+
+  <p>
+    AI-generated offers, pricing, customer targeting,
+    marketing strategy, and launch execution plans.
+  </p>
+</div>
+    <p class="subtitle">
+    </p>Turn any idea into a premium business blueprint in seconds.
+</p>
 
     <div class="card">
 
@@ -20,14 +30,18 @@
       <button onclick="generateBusiness()">
         Generate Business
       </button>
-
+      
     </div>
+<div id="results">
+  Results will appear here...
+</div>
 
-    <div id="results">
-      Results will appear here...
-    </div>
-
-  </div>
+<button id="copyBtn" onclick="copyBlueprint()">
+  Copy Blueprint
+</button>
+  </div><button id="pdfBtn" onclick="downloadPDF()">
+  Download PDF
+</button>
 
   <script src="app.js"></script>
 
