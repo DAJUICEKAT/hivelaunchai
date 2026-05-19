@@ -130,4 +130,12 @@ button:hover {
   background: #1f1f1f;
   color: white;
   border: 1px solid rgba(255,255,255,0.1);
+}details {
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+summary {
+  color: #f4b400;
+  font-weight: bold;
 }
