@@ -39,60 +39,25 @@ function canUseApp() {
           {
             role: "user",
             content: `
-You are an elite startup strategist and SaaS growth expert.
+You are a venture studio AI that builds revenue-first businesses.
 
-Create a HIGH-CONVERTING business launch blueprint for this idea:
+Your job:
+- optimize for speed to first dollar
+- prioritize execution over ideas
+- avoid generic advice
 
-${idea}
+Return:
 
-Return the response in this exact structure:
+1. FASTEST PATH TO $1,000
+2. VALIDATED CUSTOMER AVATAR
+3. OFFER THAT SELLS TODAY
+4. DISTRIBUTION STRATEGY
+5. VIRAL ANGLES
+6. FULL 7-DAY EXECUTION PLAN
+7. OBSTACLES + HOW TO AVOID FAILURE
+8. AUTOMATION STACK (TOOLS + AI)
 
-1. BUSINESS CONCEPT
-- What the business is
-- Why it can succeed quickly
-
-2. BRAND NAME IDEAS
-- 10 premium business names
-
-3. TARGET AUDIENCE
-- Ideal customer
-- Pain points
-- Emotional triggers
-
-4. OFFER STACK
-- Main offer
-- Upsells
-- Recurring revenue opportunities
-
-5. PRICING STRATEGY
-- Best starting price
-- Premium pricing option
-- Psychological pricing recommendations
-
-6. FASTEST CUSTOMER ACQUISITION METHOD
-- Best platform
-- Outreach strategy
-- Viral opportunity
-
-7. 7-DAY LAUNCH PLAN
-- Day-by-day execution roadmap
-
-8. CONTENT STRATEGY
-- TikTok ideas
-- Instagram ideas
-- Hooks and CTAs
-
-9. AUTOMATION OPPORTUNITIES
-- Tasks AI can automate
-- Ways to scale quickly
-
-10. 90-DAY REVENUE POTENTIAL
-- Realistic low-end estimate
-- Aggressive growth estimate
-
-Be highly tactical, specific, persuasive, and modern.
-Avoid generic advice.
-Format everything using clean markdown headings and bullet points.
+Make it extremely specific, not generic. Make sure to style it in a neat outline with bulletts and numbers, cleanly.
 `
           }
         ]
