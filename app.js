@@ -100,7 +100,9 @@ Format everything using clean markdown headings and bullet points.
     });
 
     const data = await response.json();
+const output = data.choices[0].message.content;
 
+saveBlueprint(idea, output);
     if (!response.ok) {
       results.innerHTML = "❌ " + (data.error?.message || "Error");
       return;
@@ -132,4 +134,34 @@ Format everything using clean markdown headings and bullet points.
   doc.text(splitText, 15, 20);
 
   doc.save("HiveLaunch-Blueprint.pdf");
-}
+}function saveBlueprint(idea, output) {
+  let history = JSON.parse(localStorage.getItem("blueprints") || "[]");
+
+  history.unshift({
+    idea,
+    output,
+    date: new Date().toISOString()
+  });
+
+  localStorage.setItem("blueprints", JSON.stringify(history));
+}function loadHistory() {
+  const historyDiv = document.getElementById("history");
+
+  let history = JSON.parse(localStorage.getItem("blueprints") || "[]");
+
+  if (history.length === 0) {
+    historyDiv.innerHTML = "No saved blueprints yet.";
+    return;
+  }
+
+  historyDiv.innerHTML = history.map(item => `
+    <div class="result-card">
+      <b>Idea:</b> ${item.idea}<br><br>
+      <b>Date:</b> ${new Date(item.date).toLocaleString()}<br><br>
+      <details>
+        <summary>View Blueprint</summary>
+        <div>${item.output.replace(/\n/g, "<br>")}</div>
+      </details>
+    </div>
+  `).join("");
+}loadHistory();
