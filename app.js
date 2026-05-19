@@ -25,7 +25,12 @@ function canUseApp() {
   🐝 Building your launch blueprint...
 </div>
 `;
-
+function formatOutput(text) {
+  return text
+    .replace(/## (.*)/g, "<h3 style='color:#f4b400;margin-top:15px;'>$1</h3>")
+    .replace(/- /g, "• ");
+}
+<div class="content">${formatOutput(output)}</div>
   try {
     const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
       method: "POST",
@@ -56,9 +61,14 @@ Return:
 6. FULL 7-DAY EXECUTION PLAN
 7. OBSTACLES + HOW TO AVOID FAILURE
 8. AUTOMATION STACK (TOOLS + AI)
+Return the response in clearly labeled sections with:
 
+- HEADINGS using ##
+- Bullet points using -
+- Short concise sentences
+- No long paragraphs
 Make it extremely specific, not generic. Make sure to style it in a neat outline with bulletts and numbers, cleanly.
-`
+'
           }
         ]
       })
@@ -66,6 +76,13 @@ Make it extremely specific, not generic. Make sure to style it in a neat outline
 
     const data = await response.json();
 const output = data.choices[0].message.content;
+
+results.innerHTML = `
+<div class="result-card">
+  <h2>🐝 Business Blueprint</h2>
+  <div class="content">${output}</div>
+</div>
+`;
 
 saveBlueprint(idea, output);
     if (!response.ok) {
