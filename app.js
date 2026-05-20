@@ -65,7 +65,7 @@ async function generateBusiness() {
     const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
       method: "POST",
       headers: {
-        "Authorization": "Bearer YOUR_API_KEY_HERE",
+        "Authorization": "Bearer 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",
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
