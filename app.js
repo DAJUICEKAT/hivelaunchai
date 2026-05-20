@@ -27,20 +27,24 @@ function formatOutput(text) {
 
 // ---------------- MAIN FUNCTION ----------------
 async function generateBusiness() {
-  console.log("BUTTON CLICKED");
 
   const idea = document.getElementById("idea").value;
+
   const results = document.getElementById("results");
 
   // ---------------- PAYWALL ----------------
   if (!isPro) {
-    if (usage >= 2) {
-      results.innerHTML = `
-        <div>
-          <h2>🐝 Free Limit Reached</h2>
-          <p>Upgrade to unlock unlimited business blueprints.</p>
 
-          <h3 style="color:#ffcc33;">$19/month</h3>
+    if (usage >= 2) {
+
+      results.innerHTML = `
+        <div class="result-card">
+
+          <h2>🐝 Upgrade to Pro</h2>
+
+          <p>
+            You’ve reached your free limit.
+          </p>
 
           <a href="https://www.paypal.com/ncp/payment/48ZPV4D4J4M9S" target="_blank">
             <button>Upgrade Now</button>
@@ -48,15 +52,98 @@ async function generateBusiness() {
 
           <br><br>
 
-          <button onclick="unlockPro()">I already paid</button>
+          <button onclick="unlockPro()">
+            I already paid
+          </button>
+
         </div>
       `;
+
       return;
     }
 
     usage++;
+
     localStorage.setItem("usage", usage);
   }
+
+  // ---------------- LOADING ----------------
+  results.innerHTML = `
+    <div class="result-card">
+      🐝 Generating your business blueprint...
+    </div>
+  `;
+
+  try {
+
+    const response = await fetch("/api/generate", {
+
+      method: "POST",
+
+      headers: {
+        "Content-Type": "application/json"
+      },
+
+      body: JSON.stringify({
+        idea: idea
+      })
+
+    });
+
+    const data = await response.json();
+
+    console.log("API RESPONSE:", data);
+
+    // ---------------- ERROR SAFETY ----------------
+    if (!response.ok || !data?.choices?.length) {
+
+      results.innerHTML = `
+        <div class="result-card">
+
+          <h3>❌ API Error</h3>
+
+          <pre>
+${data?.error?.message || JSON.stringify(data, null, 2)}
+          </pre>
+
+        </div>
+      `;
+
+      return;
+    }
+
+    // ---------------- OUTPUT ----------------
+    const output = data.choices[0].message.content;
+
+    results.innerHTML = `
+      <div class="result-card">
+
+        <h2>🐝 Business Blueprint</h2>
+
+        <div class="content">
+          ${output.replace(/\n/g, "<br>")}
+        </div>
+
+      </div>
+    `;
+
+  } catch (err) {
+
+    results.innerHTML = `
+      <div class="result-card">
+        ❌ ${err.message}
+      </div>
+    `;
+  }
+}
+
+  results.innerHTML = `
+    <div class="result-card">
+      <h2>✅ Button Works</h2>
+      <p>Your JavaScript is connected correctly.</p>
+    </div>
+  `;
+}
 
   // ---------------- LOADING ----------------
   results.innerHTML = "🐝 Generating your business plan...";
