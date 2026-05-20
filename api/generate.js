@@ -1,5 +1,6 @@
 export default async function handler(req, res) {
   try {
+    console.log("GROQ KEY:", process.env.GROQ_API_KEY);
     const { idea } = req.body;
 
     const response = await fetch(
@@ -29,4 +30,4 @@ export default async function handler(req, res) {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
-}
+}['-['-['-['-['-['-['-']]]]
