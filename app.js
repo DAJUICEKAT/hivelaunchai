@@ -63,6 +63,10 @@ async function generateBusiness() {
 
     const data = await res.json();
 
+if (!res.ok) {
+  throw new Error(data.error || "Generation failed"); if (!input || !results)
+}
+
     // ⚡ OUTPUT STATE
     brain?.classList.remove("thinking");
     brain?.classList.add("output");
