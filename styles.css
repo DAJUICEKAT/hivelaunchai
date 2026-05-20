@@ -1,4 +1,4 @@
-//* =========================
+/* =========================
    GLOBAL RESET
    ========================= */
 
@@ -296,4 +296,52 @@ details {
 summary {
   color: #f4b400;
   font-weight: bold;
+}
+/* =========================
+   LIVE AI BRAIN STATES (UPGRADE)
+   ========================= */
+
+/* idle = calm thinking field */
+.hive-brain.idle {
+  opacity: 0.25;
+  filter: brightness(1);
+}
+
+/* thinking = active computation */
+.hive-brain.thinking {
+  opacity: 0.5;
+  animation: brainPulse 1.2s infinite ease-in-out;
+}
+
+/* output = insight moment */
+.hive-brain.output {
+  opacity: 0.65;
+  filter: drop-shadow(0 0 14px rgba(255, 204, 51, 0.5));
+}
+
+/* brain “thinking glow” */
+@keyframes brainPulse {
+  0% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.35);
+  }
+  100% {
+    filter: brightness(1);
+  }
+}
+
+/* speed up neural activity when thinking */
+.hive-brain.thinking .node {
+  animation-duration: 1.6s !important;
+}
+
+.hive-brain.thinking .link {
+  animation-duration: 3.5s !important;
+}
+
+/* calm slowdown after output */
+.hive-brain.output .node {
+  animation-duration: 5s !important;
 }
