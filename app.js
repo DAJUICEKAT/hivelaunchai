@@ -37,6 +37,26 @@ async function generateBusiness() {
     return;
   }
 
+  const button = document.querySelector("button");
+button.disabled = true;
+button.innerText = "Thinking...";
+
+  if (!input.value.trim()) {
+  results.innerHTML = `
+    <div class="result-card">
+      <h2>⚠️ Missing Prompt</h2>
+      <div class="content">
+        Please enter a business idea or niche.
+      </div>
+    </div>
+  `;
+
+  button.disabled = false;
+  button.innerText = "Generate";
+
+  return;
+}
+
   // 🧠 THINKING STATE
   brain?.classList.remove("idle", "output");
   brain?.classList.add("thinking");
@@ -61,12 +81,11 @@ async function generateBusiness() {
       })
     });
 
-    const data = await res.json();
+   const data = await res.json();
 
 if (!res.ok) {
-  throw new Error(data.error || "Generation failed"); if (!input || !results)
+  throw new Error(data.error || "Generation failed");
 }
-
     // ⚡ OUTPUT STATE
     brain?.classList.remove("thinking");
     brain?.classList.add("output");
@@ -84,12 +103,18 @@ if (!res.ok) {
       brain?.classList.add("idle");
     }, 2500);
 
-  } catch (err) {
+   } catch (err) {
     console.error(err);
 
+    // reset brain state
     brain?.classList.remove("thinking", "output");
     brain?.classList.add("idle");
 
+    // restore button
+    button.disabled = false;
+    button.innerText = "Generate";
+
+    // show error
     results.innerHTML = `
       <div class="result-card">
         <h2>❌ Error</h2>
@@ -97,4 +122,18 @@ if (!res.ok) {
       </div>
     `;
   }
+
+  // restore button after success
+  button.disabled = false;
+  button.innerText = "Generate";
 }
+
+// ---------------- INITIALIZE BRAIN ----------------
+
+window.addEventListener("DOMContentLoaded", () => {
+  const brain = document.querySelector(".hive-brain");
+
+  if (brain) {
+    brain.classList.add("idle");
+  }
+});
