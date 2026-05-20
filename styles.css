@@ -1,44 +1,41 @@
-/* =========================
+//* =========================
    GLOBAL RESET
    ========================= */
 
 html, body {
   margin: 0;
   padding: 0;
-  height: 100%;
+  min-height: 100%;
   font-family: Arial, sans-serif;
   color: white;
   overflow-x: hidden;
 }
 
 /* =========================
-   HIVE BACKGROUND SYSTEM
+   BACKGROUND SYSTEM (HONEYCOMB)
    ========================= */
 
 body {
-  background-image: url("honeycomb-background.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  background: url("honeycomb-background.png") center/cover no-repeat fixed;
   position: relative;
 }
 
-/* Dark overlay */
+/* DARK OVERLAY */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   background: rgba(10, 10, 10, 0.55);
-  z-index: 0;
+  z-index: 1;
+  pointer-events: none;
 }
 
-/* Hex pulse grid overlay */
+/* HEX GRID OVERLAY */
 body::after {
   content: "";
   position: fixed;
   inset: 0;
-  z-index: 1;
+  z-index: 2;
   pointer-events: none;
 
   background-image:
@@ -50,7 +47,6 @@ body::after {
   opacity: 0.35;
 }
 
-/* Hex animation */
 @keyframes hexPulse {
   0% {
     transform: scale(1);
@@ -66,14 +62,19 @@ body::after {
   }
 }
 
-/* Everything above overlays */
+/* =========================
+   LAYER SYSTEM (CRITICAL)
+   ========================= */
+
+/* UI ABOVE EVERYTHING */
 .app-shell,
 .container,
 main,
 header,
-section {
+section,
+#results {
   position: relative;
-  z-index: 2;
+  z-index: 4;
 }
 
 /* =========================
@@ -86,7 +87,6 @@ section {
   min-height: 100vh;
 }
 
-/* Sidebar */
 .sidebar {
   background: rgba(0, 0, 0, 0.35);
   border-right: 1px solid rgba(255,255,255,0.08);
@@ -94,7 +94,6 @@ section {
   backdrop-filter: blur(18px);
 }
 
-/* Nav items */
 .nav-item {
   padding: 14px;
   border-radius: 12px;
@@ -108,7 +107,7 @@ section {
 }
 
 /* =========================
-   MAIN UI CONTAINER
+   MAIN CONTAINER
    ========================= */
 
 .container {
@@ -117,7 +116,6 @@ section {
   padding: 40px 20px;
 }
 
-/* Headings */
 h1 {
   font-size: 52px;
   margin-bottom: 10px;
@@ -129,40 +127,30 @@ h1 {
   margin-bottom: 30px;
   font-size: 18px;
 }
-/* =========================
-   PERFORMANCE BASE FIX
-   ========================= */
-
-body {
-  will-change: transform;
-  transform: translateZ(0);
-}
 
 /* =========================
-   HIVE BRAIN LAYER (OPTIMIZED)
+   HIVE BRAIN LAYER
    ========================= */
 
 .hive-brain {
   position: fixed;
   inset: 0;
-  z-index: 1;
+  z-index: 3;
   pointer-events: none;
   opacity: 0.28;
   mix-blend-mode: screen;
 
-  /* GPU boost */
   will-change: transform, opacity;
   transform: translateZ(0);
 }
 
-/* SVG */
 .hive-brain svg {
   width: 100%;
   height: 100%;
 }
 
 /* =========================
-   NODES (FIXED SVG ANIMATION)
+   NODES (NEURAL PULSE)
    ========================= */
 
 .node {
@@ -175,7 +163,6 @@ body {
   animation: nodePulse 4s ease-in-out infinite;
 }
 
-/* stagger without breaking SVG indexing */
 .node:nth-of-type(odd) {
   animation-delay: 0.4s;
 }
@@ -184,7 +171,6 @@ body {
   animation-delay: 1.1s;
 }
 
-/* smoother “thinking” pulse */
 @keyframes nodePulse {
   0% {
     transform: scale(1);
@@ -201,14 +187,13 @@ body {
 }
 
 /* =========================
-   CONNECTION FLOW (IMPROVED)
+   CONNECTION LINES
    ========================= */
 
 .link {
   stroke: rgba(255, 215, 0, 0.22);
   stroke-width: 1;
   stroke-dasharray: 8;
-
   animation: flow 8s linear infinite;
   will-change: stroke-dashoffset;
 }
@@ -221,8 +206,9 @@ body {
     stroke-dashoffset: 120;
   }
 }
+
 /* =========================
-   GLASS CARDS
+   GLASS UI CARDS
    ========================= */
 
 .card,
@@ -236,7 +222,6 @@ body {
   margin-bottom: 25px;
 }
 
-/* Result accent */
 .result-card {
   border: 1px solid rgba(244,180,0,0.15);
 }
@@ -244,49 +229,11 @@ body {
 .result-card h2 {
   color: #f4b400;
 }
-/* =========================
-   HIVE BRAIN STATES
-   ========================= */
 
-/* Idle state (default calm hive) */
-.hive-brain.idle {
-  opacity: 0.25;
+.result-card strong {
+  color: #ffcc33;
 }
 
-/* Thinking state (processing request) */
-.hive-brain.thinking {
-  opacity: 0.45;
-  animation: brainGlow 1.5s infinite ease-in-out;
-}
-
-/* Output state (result just generated) */
-.hive-brain.output {
-  opacity: 0.6;
-  filter: drop-shadow(0 0 10px rgba(255, 204, 51, 0.4));
-}
-
-/* subtle “thinking glow” */
-@keyframes brainGlow {
-  0% {
-    filter: brightness(1);
-  }
-  50% {
-    filter: brightness(1.4);
-  }
-  100% {
-    filter: brightness(1);
-  }
-}
-
-/* SPEED UP LINKS WHEN THINKING */
-.hive-brain.thinking .link {
-  animation-duration: 3s !important;
-}
-
-/* STRONGER NODE ACTIVITY WHEN THINKING */
-.hive-brain.thinking .node {
-  animation-duration: 1.8s !important;
-}
 /* =========================
    INPUTS + BUTTONS
    ========================= */
@@ -324,7 +271,6 @@ button:hover {
   box-shadow: 0 6px 20px rgba(244,180,0,0.35);
 }
 
-/* Copy button */
 #copyBtn {
   margin-top: 18px;
   background: #1f1f1f;
@@ -332,25 +278,16 @@ button:hover {
   border: 1px solid rgba(255,255,255,0.1);
 }
 
-/* Results layout */
-#results {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
+/* =========================
+   TEXT + UI ELEMENTS
+   ========================= */
 
-/* Text styling */
 .content {
   line-height: 1.7;
   font-size: 15px;
   color: #f1f1f1;
 }
 
-.result-card strong {
-  color: #ffcc33;
-}
-
-/* Details dropdown */
 details {
   margin-top: 10px;
   cursor: pointer;
