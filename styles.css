@@ -16,50 +16,20 @@ html, body {
    ========================= */
 
 body {
-  background: url("honeycomb-background.png") center/cover no-repeat fixed;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  color: white;
+  overflow-x: hidden;
+
+  background-image: url("/honeycomb-background.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
   position: relative;
-}
-
-/* DARK OVERLAY */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: rgba(10, 10, 10, 0.55);
-  z-index: 1;
-  pointer-events: none;
-}
-
-/* HEX GRID OVERLAY */
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-
-  background-image:
-    radial-gradient(circle at 25% 25%, rgba(255, 215, 0, 0.08) 2px, transparent 3px),
-    radial-gradient(circle at 75% 75%, rgba(255, 215, 0, 0.05) 2px, transparent 3px);
-
-  background-size: 120px 120px;
-  animation: hexPulse 6s ease-in-out infinite;
-  opacity: 0.35;
-}
-
-@keyframes hexPulse {
-  0% {
-    transform: scale(1);
-    opacity: 0.25;
-  }
-  50% {
-    transform: scale(1.03);
-    opacity: 0.45;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 0.25;
-  }
 }
 
 /* =========================
