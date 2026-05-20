@@ -43,7 +43,9 @@ localStorage.setItem("usage", usage);
   navigator.clipboard.writeText(window.location.href);
   alert("Link copied 🐝 Share it to unlock more ideas!");
 }return true;
-
+async function generateBusiness() {
+  console.log("BUTTON CLICKED");
+}
 }async function generateBusiness() {
 if (!isPro) {
   let usage = parseInt(localStorage.getItem("usage") || "0");
