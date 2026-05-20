@@ -1,95 +1,84 @@
-<div class="app-shell">
-<div class="sidebar">
-
-  <h2>🐝 HiveLaunch</h2>
-
-  <div class="nav-item">🏠 Dashboard</div>
-  <div class="nav-item">📚 Blueprints</div>
-  <div class="nav-item">📄 Exports</div>
-  <div class="nav-item">⚙ Settings</div>
-
-</div>
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html>
 <head>
-    <script src="https://www.paypal.com/sdk/js?client-id=Ac190WpMtbsAiO1WV99bQ56CML6zuh5Eihz8Mz493ivbpUodioESiUgwjvKak6gCMD6F1SFuM40Lz5c_"></script>
   <title>HiveLaunch AI</title>
-  <link rel="stylesheet" href="styles.css">
-</head><script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #0b0b0d;
+      background-image:
+        radial-gradient(circle at top left, rgba(244,180,0,0.15), transparent 45%),
+        radial-gradient(circle at bottom right, rgba(255,204,51,0.10), transparent 50%),
+        url("https://www.transparenttextures.com/patterns/hexellence.png");
+      color: white;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #f4b400;
+    }
+
+    input {
+      width: 80%;
+      padding: 12px;
+      margin-top: 15px;
+      border-radius: 10px;
+      border: none;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 12px 20px;
+      border-radius: 10px;
+      border: none;
+      background: linear-gradient(135deg, #f4b400, #ffcc33);
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .result-card {
+      margin-top: 20px;
+      padding: 20px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(244,180,0,0.15);
+      text-align: left;
+    }
+
+    .content {
+      white-space: pre-wrap;
+      line-height: 1.6;
+    }
+  </style>
+</head>
 
 <body>
 
-  <div class="container">
+<div class="container">
 
-    <h1>🐝 HiveLaunch AI</h1>
-    <div class="card">
-  <h2>🚀 Launch Faster</h2>
+  <h1>🐝 HiveLaunch AI</h1>
+  <p>Turn any idea into a business in seconds</p>
 
-  <p>
-    AI-generated offers, pricing, customer targeting,
-    marketing strategy, and launch execution plans.
-  </p>
-</div>
-    <p class="subtitle">
-    </p>Turn any idea into a premium business blueprint in seconds.
-</p>
+  <input id="idea" placeholder="Enter your business idea..." />
+  <br>
 
-    <div class="card">
+  <button onclick="generateBusiness()">Generate Business</button>
 
-      <input id="idea" placeholder="Enter your business idea..." />
-<script>
-async function generateBusiness() 
-     <button onclick="generateBusiness()">
-  Generate Business
-</button>
-      
-   </div>
-   <div class="result-card">
-  <h2>🐝 HiveLaunch Pro</h2>
-  <p>Unlimited business blueprints, PDF exports, and premium strategies.</p>
-</div>
-<div id="results">
-  Results will appear here...
-  <button onclick="shareBlueprint()">
-  Share Blueprint
-</button>
-</div><div class="card">
-  <h2>📚 Your Blueprints</h2>
-  <div id="history">No saved blueprints yet.</div>
+  <div id="results" class="result-card">
+    Results will appear here...
+  </div>
+
 </div>
 
-<button id="copyBtn" onclick="copyBlueprint()">
-  Copy Blueprint
-</button>
-  </div><button id="pdfBtn" onclick="downloadPDF()">
-  Download PDF
-</button>
-<a href="https://www.paypal.com/sdk/js?client-id=ASSde-sUa2cF3OIU0-Lr1xnwF1XjS5qUK1V8nL_wl8ynh8WyywymyaRtXl6j943vuuCU3mHQ7teJYnE6&vault=true&intent=subscription" data-sdk-integration-source="button-factory" target="_blank">
-  <button>Upgrade to Pro ($19/mo)</button>
-</a>
-<div id="paypal-button-container-P-9MW84867MV642510KNIGP7PA"></div>
-<script src="https://www.paypal.com/sdk/js?client-id=ASSde-sUa2cF3OIU0-Lr1xnwF1XjS5qUK1V8nL_wl8ynh8WyywymyaRtXl6j943vuuCU3mHQ7teJYnE6&vault=true&intent=subscription" data-sdk-integration-source="button-factory"></script>
-<script>
-  paypal.Buttons({
-      style: {
-          shape: 'pill',
-          color: 'gold',
-          layout: 'vertical',
-          label: 'subscribe'
-      },
-      createSubscription: function(data, actions) {
-        return actions.subscription.create({
-          /* Creates the subscription */
-          plan_id: 'P-9MW84867MV642510KNIGP7PA'
-        });
-      },
-      onApprove: function(data, actions) {
-        alert(data.subscriptionID); // You can add optional success message for the subscriber here
-      }
-  }).render('#paypal-button-container-P-9MW84867MV642510KNIGP7PA'); // Renders the PayPal button
-</script>
-  <script src="app.js"></script>
-<button onclick="shareTool()">Share HiveLaunch</button>
+<script src="app.js"></script>
+
 </body>
 </html>
-</div>
