@@ -1,3 +1,14 @@
+<div class="app-shell">
+<div class="sidebar">
+
+  <h2>🐝 HiveLaunch</h2>
+
+  <div class="nav-item">🏠 Dashboard</div>
+  <div class="nav-item">📚 Blueprints</div>
+  <div class="nav-item">📄 Exports</div>
+  <div class="nav-item">⚙ Settings</div>
+
+</div>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,9 +42,16 @@
         Generate Business
       </button>
       
-    </div>
+   </div>
+   <div class="result-card">
+  <h2>🐝 HiveLaunch Pro</h2>
+  <p>Unlimited business blueprints, PDF exports, and premium strategies.</p>
+</div>
 <div id="results">
   Results will appear here...
+  <button onclick="shareBlueprint()">
+  Share Blueprint
+</button>
 </div><div class="card">
   <h2>📚 Your Blueprints</h2>
   <div id="history">No saved blueprints yet.</div>
@@ -45,8 +63,32 @@
   </div><button id="pdfBtn" onclick="downloadPDF()">
   Download PDF
 </button>
-
+<a href="https://www.paypal.com/sdk/js?client-id=ASSde-sUa2cF3OIU0-Lr1xnwF1XjS5qUK1V8nL_wl8ynh8WyywymyaRtXl6j943vuuCU3mHQ7teJYnE6&vault=true&intent=subscription" data-sdk-integration-source="button-factory" target="_blank">
+  <button>Upgrade to Pro ($19/mo)</button>
+</a>
+<div id="paypal-button-container-P-9MW84867MV642510KNIGP7PA"></div>
+<script src="https://www.paypal.com/sdk/js?client-id=ASSde-sUa2cF3OIU0-Lr1xnwF1XjS5qUK1V8nL_wl8ynh8WyywymyaRtXl6j943vuuCU3mHQ7teJYnE6&vault=true&intent=subscription" data-sdk-integration-source="button-factory"></script>
+<script>
+  paypal.Buttons({
+      style: {
+          shape: 'pill',
+          color: 'gold',
+          layout: 'vertical',
+          label: 'subscribe'
+      },
+      createSubscription: function(data, actions) {
+        return actions.subscription.create({
+          /* Creates the subscription */
+          plan_id: 'P-9MW84867MV642510KNIGP7PA'
+        });
+      },
+      onApprove: function(data, actions) {
+        alert(data.subscriptionID); // You can add optional success message for the subscriber here
+      }
+  }).render('#paypal-button-container-P-9MW84867MV642510KNIGP7PA'); // Renders the PayPal button
+</script>
   <script src="app.js"></script>
-
+<button onclick="shareTool()">Share HiveLaunch</button>
 </body>
 </html>
+</div>
