@@ -1,4 +1,14 @@
-let freeUses = 3;
+let currentUser = localStorage.getItem("user") || null;
+function login(email) {
+  localStorage.setItem("user", email);
+  currentUser = email;
+}if (!currentUser) {
+  currentUser = prompt("Enter your email to start:");
+  login(currentUser);
+}
+}
+let isPro = localStorage.getItem("isPro") === "true";
+let freeUses = 1;
 let isPremium = false;
 
 // CORE ACCESS CONTROL
@@ -10,11 +20,80 @@ function canUseApp() {
       "🚫 Upgrade to continue using HiveLaunch AI";
     return false;
   }
+  let usage =
+  parseInt(localStorage.getItem("usage") || "0");
+
+if (usage >= 2) {
+  results.innerHTML =
+    "Upgrade to Pro for unlimited generations.";
+
+  return;
+}
+function unlockPro() {
+  localStorage.setItem("isPro", "true");
+  isPro = true;
+  alert("Pro unlocked 🐝");
+}
+usage++;
+
+localStorage.setItem("usage", usage);
 
   freeUses--;
-  return true;
-}async function generateBusiness() {
+  function shareTool() {
+  navigator.clipboard.writeText(window.location.href);
+  alert("Link copied 🐝 Share it to unlock more ideas!");
+}return true;
 
+}async function generateBusiness() {
+if (!isPro) {
+  let usage = parseInt(localStorage.getItem("usage") || "0");
+
+  if (usage >= 2) {
+    results.innerHTML = `
+      results.innerHTML = `
+<div class="result-card">
+
+  <h2>🐝 Free Limit Reached</h2>
+
+  <p>
+    You’ve used your free business blueprint generations.
+    Upgrade to unlock unlimited access and premium tools.
+  </p>
+
+  <div style="margin-top:15px;">
+    <h3 style="color:#ffcc33;">Pro Plan — $19/month</h3>
+  </div>
+
+  <ul>
+    <li>Unlimited business blueprints</li>
+    <li>PDF export reports</li>
+    <li>Startup scoring system</li>
+    <li>Marketing + content strategies</li>
+    <li>Saved history</li>
+  </ul>
+
+  <a href="https://www.paypal.com/ncp/payment/48ZPV4D4J4M9S" target="_blank">
+    <button>Upgrade to Pro</button>
+  </a>
+
+  <br><br>
+
+  <button onclick="unlockPro()">
+    I already paid (activate access)
+  </button>
+
+  <p style="font-size:12px; color:#aaa;">
+    Access is unlocked instantly after payment
+  </p>
+
+</div>
+`;
+    `;
+    return;
+  }
+
+  localStorage.setItem("usage", usage + 1);
+}
   if (!canUseApp()) return;
 
   const idea = document.getElementById("idea").value;
@@ -30,6 +109,12 @@ function formatOutput(text) {
     .replace(/## (.*)/g, "<h3 style='color:#f4b400;margin-top:15px;'>$1</h3>")
     .replace(/- /g, "• ");
 }
+function shareBlueprint() {
+
+  navigator.clipboard.writeText(window.location.href);
+
+  alert("Share link copied 🐝");
+}
 <div class="content">${formatOutput(output)}</div>
   try {
     const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
@@ -44,32 +129,51 @@ function formatOutput(text) {
           {
             role: "user",
             content: `
-You are a venture studio AI that builds revenue-first businesses.
+You are an elite startup strategist AI.
 
-Your job:
-- optimize for speed to first dollar
-- prioritize execution over ideas
-- avoid generic advice
+Your job is to generate business ideas that feel:
+- modern
+- scalable
+- profitable
+- exciting
 
-Return:
+Avoid generic advice.
 
-1. FASTEST PATH TO $1,000
-2. VALIDATED CUSTOMER AVATAR
-3. OFFER THAT SELLS TODAY
-4. DISTRIBUTION STRATEGY
-5. VIRAL ANGLES
-6. FULL 7-DAY EXECUTION PLAN
-7. OBSTACLES + HOW TO AVOID FAILURE
-8. AUTOMATION STACK (TOOLS + AI)
-Return the response in clearly labeled sections with:
+Output must feel like:
+- a consultant
+- a startup advisor
+- a growth strategist
 
-- HEADINGS using ##
-- Bullet points using -
-- Short concise sentences
-- No long paragraphs
-Make it extremely specific, not generic. Make sure to style it in a neat outline with bulletts and numbers, cleanly.
-'
-          }
+Return concise sections:
+
+1. MONEY OPPORTUNITY
+2. WHY THIS CAN WIN
+3. FASTEST PATH TO FIRST $1,000
+4. CONTENT ANGLES THAT GO VIRAL
+5. FIRST 10 CUSTOMER STRATEGY
+6. SIMPLE TECH STACK
+7. STARTUP SCORE (0-100)
+
+Make it bold, actionable, and emotionally exciting. MAKE SURE TO KEEP IT CLEAN IN A BULLETTED FORMAT AND EASY TO READ.
+You are a venture studio AI.
+
+Return outputs that are:
+- concise
+- structured
+- actionable
+- business-ready
+
+Each section must feel like it was written by a startup consultant.
+
+Avoid fluff.
+
+Always include:
+- MONEY OPPORTUNITY
+- FASTEST WAY TO FIRST $1,000
+- CUSTOMER ACQUISITION PLAN
+- CONTENT IDEAS THAT GO VIRAL
+- EXECUTION PLAN (7 DAYS)
+- STARTUP SCORE (0–100)          }
         ]
       })
     });
