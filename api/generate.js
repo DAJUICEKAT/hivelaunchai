@@ -17,16 +17,26 @@ export default async function handler(req, res) {
       });
     }
 
+    const apiKey = process.env.OPENAI_API_KEY || process.env.GROQ_API_KEY;
+    const model = process.env.OPENAI_MODEL || "llama-3.1-8b-instant";
+
+    if (!apiKey) {
+      return res.status(500).json({
+        error: "Server error",
+        details: "OPENAI_API_KEY or GROQ_API_KEY is not set"
+      });
+    }
+
     const response = await fetch(
       "https://api.groq.com/openai/v1/chat/completions",
       {
         method: "POST",
         headers: {
-          "Authorization": `Bearer ${process.env.GROQ_API_KEY}`,
+          "Authorization": `Bearer ${apiKey}`,
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          model: "llama-3.1-8b-instant",
+          model,
           messages: [
             {
               role: "system",
